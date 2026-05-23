@@ -47,21 +47,21 @@ A modern **Full Stack MERN E-commerce Web Application** built with the latest te
 ```bash
 Vashtra-Ecommerce/
 │
-├── frontend/
+├── Frontend/
 │   ├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── assets/
-│   └── ...
+│     ├── Components/
+│     ├── Pages/
+│     ├── assets/
+│     └── ...
 │
-├── backend/
-│   ├── controllers/
-│   ├── routes/
-│   ├── models/
-│   ├── middleware/
-│   └── ...
+├── Back-end/
+|   ├──src
+│     ├── Controllers/
+│     ├── Routes/
+│     ├── Models/
+│     ├── Middleware/
+│     └── ...
 │
-├── package.json
 └── README.md
 ```
 
@@ -88,7 +88,7 @@ cd vasthra-ecommerce
 ## 3️⃣ Install Frontend Dependencies
 
 ```bash
-cd frontend
+cd Frontend
 npm install
 ```
 
@@ -97,7 +97,7 @@ npm install
 ## 4️⃣ Install Backend Dependencies
 
 ```bash
-cd backend
+cd Back-end
 npm install
 ```
 
@@ -123,14 +123,14 @@ CLOUDINARY_API_SECRET=your_api_secret
 ## Start Backend
 
 ```bash
-cd backend
+cd Back-end
 npm run dev
 ```
 
 ## Start Frontend
 
 ```bash
-cd frontend
+cd Frontend
 npm run dev
 ```
 
