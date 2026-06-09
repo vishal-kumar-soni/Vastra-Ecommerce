@@ -53,7 +53,7 @@ function ShopCategory({ banner, category }) {
       <Navbar />
 
       <section className="pt-24 bg-gradient-to-b from-[#d9fff8] via-white to-white overflow-hidden">
-        <div  ref={heroRef} className="relative mx-auto w-[92%] max-w-7xl h-[360px] md:h-[420px] rounded-[32px] overflow-hidden">
+        <div ref={heroRef} className="relative mx-auto w-[92%] max-w-7xl h-[360px] md:h-[420px] rounded-[32px] overflow-hidden">
           <img
             src={banner}
             className="absolute inset-0 w-full h-full object-cover scale-105"
@@ -90,13 +90,13 @@ function ShopCategory({ banner, category }) {
         <div className=" flex w-full m-10 pl-3  gap-6 ">
           <Link to="/men">
             <div className="py-2 px-3 bg-gray-200 text-cyan-700 cursor-pointer rounded">Men</div>
-             </Link>
-            <Link to='/women'>
+          </Link>
+          <Link to='/women'>
             <div className="py-2 px-3 bg-gray-200 text-cyan-700 cursor-pointer rounded">Women</div>
-            </Link>
-            <Link to='/kid'>
+          </Link>
+          <Link to='/kid'>
             <div className="py-2 px-3 bg-gray-200 text-cyan-700 cursor-pointer rounded">Kids</div>
-            </Link>
+          </Link>
         </div>
 
         {/* ================= STATS BAR ================= */}
@@ -104,7 +104,7 @@ function ShopCategory({ banner, category }) {
         <div id="stats" className="mt-14 mx-auto w-[92%] max-w-7xl grid grid-cols-2 sm:grid-cols-4 gap-6">
           {[
             ["Premium", "Materials"],
-            ["36+", "Products"],
+            [filteredProducts.length, "Products"],
             ["4.9★", "Ratings"],
             ["Fast", "Delivery"],
           ].map(([title, sub], i) => (
@@ -113,7 +113,7 @@ function ShopCategory({ banner, category }) {
               id="stats-container"
               className="bg-white/70 backdrop-blur-xl rounded-2xl p-6 text-center shadow-md max-sm:p-4"
             >
-              <h3 className="text-2xl font-bold max-sm:text-[24px] ">{title}</h3>
+              <h3 className="text-2xl font-bold max-sm:text-[24px] ">{(sub == "Products") ? `${title}+` : title}</h3>
               <p className="text-gray-500 text-sm mt-1 ">{sub}</p>
             </div>
           ))}
