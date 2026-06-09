@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
 import dataProducts from "../Components/Assets/related"
-import Item from '../Components/Item'
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Item2 from './item2';
 
 
 function RelatedProducts(props) {
@@ -54,7 +54,7 @@ function RelatedProducts(props) {
             <div id="relatedProduct-item" className='relatedProductItem flex gap-7 mt-12 max-lg:gap-3 max-md:grid max-md:grid-cols-2'>
                 {dataProducts.map((item, i) => {
                     if (product.category === item.category) {
-                        return <div key={item.id} className='' ref={(el) => (cardsRef.current[i] = el)}> <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} />
+                        return <div key={item.id} className='' ref={(el) => (cardsRef.current[i] = el)}> <Item2 key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} />
                         </div>
                     }
                 })}
