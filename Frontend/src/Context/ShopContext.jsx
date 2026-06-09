@@ -61,20 +61,23 @@ const ShopContextProvider = (props) => {
 
 
     const addToCart = async (itemId) => {
-        setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }))
-
         try {
             const response = await axios.post(
                 "http://localhost:4000/api/product/addcart",
-                { "itemId": itemId },   // request body
-                {
-                    withCredentials: true
-                }
+                { itemId },
+                { withCredentials: true }
             );
 
-            alert("✅ Product added to cart successfully")
+            if (response.data.success) {
+                setCartItems((prev) => ({
+                    ...prev,
+                    [itemId]: (prev[itemId] || 0) + 1
+                }));
+            }
+
         } catch (error) {
-            console.error("Error while adding to cart:", error.response?.data || error.message);
+            console.error(error);
+            alert("Please login first");
         }
     };
 

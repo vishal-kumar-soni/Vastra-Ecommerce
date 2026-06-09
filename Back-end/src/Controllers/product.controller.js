@@ -105,19 +105,28 @@ const addCart = async (req, res) => {
             });
         }
 
-        // Handle item count safely
         if (user.cartData[itemId]) {
             user.cartData[itemId] += 1;
         } else {
             user.cartData[itemId] = 1;
         }
+
         user.markModified("cartData");
         await user.save();
 
+        return res.status(200).json({
+            success: true,
+            message: "Item added to cart",
+            cartData: user.cartData
+        });
 
     } catch (error) {
-       console.log(error,"Error occur while adding item to cart")
+        console.log(error);
 
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
     }
 };
 
