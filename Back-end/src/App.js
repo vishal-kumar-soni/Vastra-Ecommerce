@@ -8,8 +8,8 @@ app.use(cors({
     "http://localhost:5173",
     "http://localhost:5174",
     "http://localhost:4175",
-    "https://vastra-ecommerce-frontend.onrender.com", // Frontend 
-    "https://vastra-ecommerce-admin.onrender.com" // Admin
+    process.env.FRONTEND_URL,
+    process.env.ADMIN_URL
   ],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   credentials: true
