@@ -22,7 +22,7 @@ function Signup() {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "http://localhost:4000/api/user/signup",
+                "https://vastra-ecommerce-backend.onrender.com/api/user/signup",
                 { userName, email, password },
                 { withCredentials: true },
             );

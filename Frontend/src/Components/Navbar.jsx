@@ -57,7 +57,7 @@ function Navbar() {
     });
 
     const handleLogout = async () => {
-        await axios.post("http://localhost:4000/api/user/logout", {
+        await axios.post("https://vastra-ecommerce-backend.onrender.com/api/user/logout", {
             withCredentials: true
         })
             .then((res) => {

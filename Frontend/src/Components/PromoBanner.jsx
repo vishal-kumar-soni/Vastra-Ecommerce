@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const PromoBanner = () => {
 
-     gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger);
 
     useGSAP(()=>{
         gsap.to("#promoContainer",{
