@@ -22,7 +22,7 @@ function Signup() {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "https://vastra-ecommerce-backend.onrender.com/api/user/signup",
+                "https://vastra-ecommerce-backend-w9o9.onrender.com/api/user/signup",
                 { userName, email, password },
                 { withCredentials: true },
             );

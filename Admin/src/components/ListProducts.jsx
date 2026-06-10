@@ -8,7 +8,7 @@ function ListProducts() {
 
   // fetch all products
   const fetchAllProducts = async () => {
-    const response = await axios.get('https://vastra-ecommerce-backend.onrender.com/api/product/getallproducts')
+    const response = await axios.get('https://vastra-ecommerce-backend-w9o9.onrender.com/api/product/getallproducts')
     setAllProducts(response.data.data)
   }
 
@@ -19,7 +19,7 @@ function ListProducts() {
 
   // Remove Product
   const removeProduct = async (id) => {
-     await axios.post('https://vastra-ecommerce-backend.onrender.com/api/product/removeproduct', { id: id })
+     await axios.post('https://vastra-ecommerce-backend-w9o9.onrender.com/api/product/removeproduct', { id: id })
 
     fetchAllProducts()
   }

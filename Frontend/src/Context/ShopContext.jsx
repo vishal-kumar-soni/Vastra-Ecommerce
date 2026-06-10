@@ -25,7 +25,7 @@ const ShopContextProvider = (props) => {
         const getProducts = async () => {
 
             try {
-                const response = await axios.get("https://vastra-ecommerce-backend.onrender.com/api/product/getallproducts");
+                const response = await axios.get("https://vastra-ecommerce-backend-w9o9.onrender.com/api/product/getallproducts");
                 setAllProducts(response.data.data);
             } catch (error) {
                 console.log(error);
@@ -44,7 +44,7 @@ const ShopContextProvider = (props) => {
                 try {
 
                     const cartRes = await axios.post(
-                        "https://vastra-ecommerce-backend.onrender.com/api/product/getcart",
+                        "https://vastra-ecommerce-backend-w9o9.onrender.com/api/product/getcart",
                         {}, // Empty body
                         { withCredentials: true } // CRITICAL: This sends the cookie to your middleware
                     );
@@ -63,7 +63,7 @@ const ShopContextProvider = (props) => {
     const addToCart = async (itemId) => {
         try {
             const response = await axios.post(
-                "https://vastra-ecommerce-backend.onrender.com/api/product/addcart",
+                "https://vastra-ecommerce-backend-w9o9.onrender.com/api/product/addcart",
                 { itemId },
                 { withCredentials: true }
             );
@@ -86,7 +86,7 @@ const ShopContextProvider = (props) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }))
         try {
             await axios.post(
-                "https://vastra-ecommerce-backend.onrender.com/api/product/removecart",
+                "https://vastra-ecommerce-backend-w9o9.onrender.com/api/product/removecart",
                 { "itemId": itemId },   // request body
                 {
                     withCredentials: true
