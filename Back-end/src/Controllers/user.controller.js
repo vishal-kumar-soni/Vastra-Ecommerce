@@ -4,73 +4,64 @@ import jwt from 'jsonwebtoken'
 
 // Function to login a user
 const login = async (req, res) => {
-
-    // 1. Get user details from frontend ( or from postman).
-    // 3. check if email or userName is correct or not.
-    // 4. if email is correct, then check the password.
-    // 5. assign a jwt token, send it to the client's browser
-    // 6. set cookie
-    // 7. return th data
-
     const { email, password } = req.body;
 
     try {
-
         if (!email || !password) {
-            return res.status(404).json({
+            return res.status(400).json({
                 success: false,
-                message: "All input fields are not filled",
-            })
+                message: "All input fields are required",
+            });
         }
 
-        const existedUser = await UserModel.findOne({ email: email })
+        const existedUser = await UserModel.findOne({ email });
 
         if (!existedUser) {
             return res.status(404).json({
                 success: false,
                 message: "User does not exist with this email",
-            })
+            });
         }
 
-        const isPasswordMatch = await existedUser.isPasswordCorrect(password)
+        const isPasswordMatch = await existedUser.isPasswordCorrect(password);
 
         if (!isPasswordMatch) {
             return res.status(400).json({
                 success: false,
                 message: "Password is incorrect",
-            })
+            });
         }
 
         const token = jwt.sign(
-            { userId: existedUser._id, email: existedUser.email },
+            {
+                userId: existedUser._id,
+                email: existedUser.email,
+            },
             process.env.SECRET,
-            { expiresIn: "1d" }
-        )
+            {
+                expiresIn: "1d",
+            }
+        );
 
-        res.cookie('token', token, {
-            httpOnly: false,
-            secure: false,
-            sameSite: "lax",
-            path: '/',
-            maxAge: 24 * 60 * 60 * 1000 // 1 day
-        })
-
-        const userResponse = { ...existedUser.toObject() }
-        delete userResponse.password
+        const userResponse = existedUser.toObject();
+        delete userResponse.password;
 
         return res.status(200).json({
             success: true,
             message: "Successfully login",
-            user: userResponse
-        })
+            token,
+            user: userResponse,
+        });
 
     } catch (error) {
+        console.error("Login Error:", error);
+
         return res.status(500).json({
             success: false,
-            message: "user could not be logged in",
-        })
+            message: "User could not be logged in",
+        });
     }
-}
+};
 
 // Function to Register a user
 const registerUser = async (req, res) => {
@@ -87,56 +78,50 @@ const registerUser = async (req, res) => {
     const { email, userName, password } = req.body; //1
 
     try {
-    const existedUser = await UserModel.findOne({ email }) //2
-    if (existedUser) {
-        return res.status(400).json({
-            success: false,
-            message: "User already exist with this email ",
+        const existedUser = await UserModel.findOne({ email }) //2
+        if (existedUser) {
+            return res.status(400).json({
+                success: false,
+                message: "User already exist with this email ",
+            })
+        }
+
+        let cart = {}; //3
+        for (let i = 0; i < 200; i++) {
+            cart[i] = 0;
+        }
+
+        const user = await UserModel.create({ //4
+            email,
+            password,
+            userName,
+            cartData: cart,
         })
-    }
 
-    let cart = {}; //3
-    for (let i = 0; i < 200; i++) {
-        cart[i] = 0;
-    }
+        const token = jwt.sign( //5
+            { userId: user.id, email: user.email },
+            process.env.SECRET,
+            { expiresIn: "1d" }
+        )
 
-    const user = await UserModel.create({ //4
-        email,
-        password,
-        userName,
-        cartData: cart,
-    })
 
-    const token = jwt.sign( //5
-        { userId: user.id, email: user.email },
-        process.env.SECRET,
-        { expiresIn: "1d" }
-    )
+        const createdUser = await UserModel.findById(user.id).select( //6
+            "-password "
+        )
 
-    res.cookie('token', token, {
-        httpOnly: false,
-        secure: process.env.SECRET === 'production',
-        sameSite: "lax",
-        path: '/',
-        maxAge: 24 * 60 * 60 * 1000 // 1 day
-    })
+        if (!createdUser) {
+            return res.status(500).json({
+                success: false,
+                message: "user could not be created",
+            })
+        }
 
-    const createdUser = await UserModel.findById(user.id).select( //6
-        "-password "
-    )
-
-    if (!createdUser) {
-        return res.status(500).json({
-            success: false,
-            message: "user could not be created",
-        })
-    }
-
-    return res.status(200).json({
-        success: true,
-        message: "User created successfully",
-        user: createdUser
-    })
+        return res.status(201).json({
+            success: true,
+            message: "User registered successfully",
+            token,
+            createdUser
+        });
 
     } catch (error) {
         return res.status(500).json({
@@ -150,7 +135,10 @@ const registerUser = async (req, res) => {
 // Function to logout a user
 const logout = async (req, res) => {
     try {
-        res.clearCookie('token')
+        localStorage.removeItem("token");
+        // setToken(null);
+        window.location.href = "/login";
+
         return res.status(200).json({
             success: true,
             message: "Successfully logout",

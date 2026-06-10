@@ -24,7 +24,6 @@ function Signup() {
             const response = await axios.post(
                 "https://vastra-ecommerce-backend-w9o9.onrender.com/api/user/signup",
                 { userName, email, password },
-                { withCredentials: true },
             );
 
             if (response.data.success) {
@@ -40,18 +39,18 @@ function Signup() {
 
     return (
         <div className='min-h-screen w-full flex items-center justify-center bg-[#f8fafc] relative overflow-hidden font-sans px-4 py-24'>
-            
+
             {/* Soft Background Accents */}
-             <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-emerald-200/40 rounded-full blur-[120px]" />
+            <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-emerald-200/40 rounded-full blur-[120px]" />
             <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-teal-200/40 rounded-full blur-[120px]" />
-            
+
             {/* Main Container */}
             <div className='relative z-10 w-full max-w-[950px] flex bg-white rounded-[32px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.08)] border border-white'>
-                
+
                 {/* Left Side: Branding / Visual */}
                 <div className='hidden sm:flex w-[40%] bg-[#2fafbd] relative p-12 flex-col justify-between overflow-hidden max-md:p-8'>
                     <div className="absolute top-[-10%] left-[-10%] w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-                    
+
                     <div className='relative z-10'>
                         <h2 className='text-white text-4xl font-black leading-tight'>
                             Join the <br /> Vashtra <br /> Community
@@ -71,9 +70,9 @@ function Signup() {
                 {/* Right Side: Signup Form */}
                 <div className='w-full sm:w-[60%] p-8 sm:p-8'>
                     <div className="mb-8">
-                           <h1 className='text-3xl text-center font-extrabold bg-gradient-to-r from-cyan-500 via-cyan-400 to-cyan-500 bg-clip-text text-transparent tracking-tight mb-2'>
-                                VASHTRA
-                            </h1>
+                        <h1 className='text-3xl text-center font-extrabold bg-gradient-to-r from-cyan-500 via-cyan-400 to-cyan-500 bg-clip-text text-transparent tracking-tight mb-2'>
+                            VASHTRA
+                        </h1>
                         <p className='text-gray-500 mt-2 font-medium'>Sign up to start your fashion journey with Vashtra.</p>
                     </div>
 
@@ -128,11 +127,11 @@ function Signup() {
 
                         {/* Terms Checkbox */}
                         <div className='flex items-start gap-3 pt-1'>
-                            <input 
-                                type="checkbox" 
-                                id="agree" 
-                                required 
-                                className='mt-1 accent-[#059669] w-4 h-4 cursor-pointer' 
+                            <input
+                                type="checkbox"
+                                id="agree"
+                                required
+                                className='mt-1 accent-[#059669] w-4 h-4 cursor-pointer'
                             />
                             <label htmlFor="agree" className='text-xs text-gray-500 leading-tight cursor-pointer'>
                                 By continuing, I agree to the <span className='text-[#059669] font-bold underline'>Terms of Use</span> and <span className='text-[#059669] font-bold underline'>Privacy Policy</span>.
@@ -148,7 +147,7 @@ function Signup() {
                     </form>
 
                     <p className='text-center text-gray-400 text-sm font-medium mt-6'>
-                        Already have an account? 
+                        Already have an account?
                         <Link to="/login" className='text-[#059496] font-black ml-2 hover:underline'>Login here</Link>
                     </p>
                 </div>
