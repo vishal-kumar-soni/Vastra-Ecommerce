@@ -3,7 +3,7 @@ import dataProducts from "../Components/Assets/related"
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Item2 from './item2';
+import Item2 from './Item2';
 
 
 function RelatedProducts(props) {
