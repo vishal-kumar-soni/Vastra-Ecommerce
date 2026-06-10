@@ -41,7 +41,7 @@ function AddProducts() {
             formData.append("image", image);
 
             const response = await axios.post(
-                "http://localhost:4000/api/file/upload",
+                "https://vastra-ecommerce-backend.onrender.com/api/file/upload",
                 formData
             );
 
@@ -59,7 +59,7 @@ function AddProducts() {
             };
 
             const { data } = await axios.post(
-                "http://localhost:4000/api/product/addproducts",
+                "https://vastra-ecommerce-backend.onrender.com/api/product/addproducts",
                 product,
                 {
                     headers: {
