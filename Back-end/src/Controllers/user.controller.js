@@ -87,7 +87,7 @@ const registerUser = async (req, res) => {
         }
 
         let cart = {}; //3
-        for (let i = 0; i < 200; i++) {
+        for (let i = 0; i < 50; i++) {
             cart[i] = 0;
         }
 
@@ -103,6 +103,14 @@ const registerUser = async (req, res) => {
             process.env.SECRET,
             { expiresIn: "1d" }
         )
+
+
+        return res.status(200).json({
+            success: true,
+            message: "Successfully login",
+            token,
+            user: userResponse,
+        });
 
 
         const createdUser = await UserModel.findById(user.id).select( //6

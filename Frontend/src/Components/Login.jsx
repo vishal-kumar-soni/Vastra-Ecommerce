@@ -23,6 +23,8 @@ function Login() {
                 "https://vastra-ecommerce-backend-w9o9.onrender.com/api/user/login",
                 { email, password },
             );
+
+            console.log("This is the cart data after login",response.data.user.cartData)
             if (response.data.success) {
                 localStorage.setItem("token", response.data.token);
                 setToken(response.data.token);
@@ -32,10 +34,7 @@ function Login() {
             }
         } catch (error) {
             console.log("FULL ERROR:", error);
-            console.log("RESPONSE:", error.response);
-            console.log("DATA:", error.response?.data);
-
-            alert(error.response?.data?.message || error.message);
+            alert(error.response?.data?.message || error.message); 
         }
     };
 

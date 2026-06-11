@@ -3,7 +3,11 @@ import { UserModel } from "../Models/user.model.js";
 
 const isAuth = async (req, res, next) => {
   try {
+
     const authHeader = req.headers.authorization;
+
+    console.log("Authorization Header:", req.headers.authorization);
+
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res.status(401).json({
@@ -28,6 +32,7 @@ const isAuth = async (req, res, next) => {
     }
 
     req.user = user;
+    console.log("isAuth user ", req.user)
     next();
 
   } catch (error) {

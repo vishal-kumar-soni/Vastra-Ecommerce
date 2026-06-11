@@ -94,9 +94,11 @@ const getAllProducts = async (req, res) => {
 // Function to add cart
 const addCart = async (req, res) => {
     try {
+
         const { itemId } = req.body;
 
         const user = await UserModel.findById(req.user._id);
+
 
         if (!user) {
             return res.status(404).json({
@@ -111,8 +113,11 @@ const addCart = async (req, res) => {
             user.cartData[itemId] = 1;
         }
 
+
         user.markModified("cartData");
         await user.save();
+
+        console.log(user.email, "addcart updated in controller")
 
         return res.status(200).json({
             success: true,
@@ -153,6 +158,11 @@ const removeCart = async (req, res) => {
         user.markModified("cartData");
         await user.save();
 
+        return res.status(200).json({
+            success: true,
+            cartData: user.cartData,
+        });
+
 
     } catch (error) {
         console.log(error);
@@ -167,15 +177,23 @@ const removeCart = async (req, res) => {
 const getCart = async (req, res) => {
     try {
         const user = await UserModel.findById(req.user._id);
+
         if (!user) {
             return res.status(404).json({
                 success: false,
                 message: "User not found"
             });
         }
-        res.json(user.cartData);
+
+        return res.status(201).json({
+            success: true,
+            cartData: user.cartItems,
+            message:"cart is get"
+        });
+
     } catch (error) {
         console.log(error);
+
         return res.status(500).json({
             success: false,
             message: "Error occur while fetching cart data"
@@ -183,4 +201,4 @@ const getCart = async (req, res) => {
     }
 }
 
-export { addProducts, removeProduct, getAllProducts, addCart, removeCart,getCart }
+export { addProducts, removeProduct, getAllProducts, addCart, removeCart, getCart }

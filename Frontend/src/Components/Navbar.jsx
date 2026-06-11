@@ -3,7 +3,7 @@ import Logo from "../Components/Assets/logoshoping.png";
 import "./Button.css";
 import CartIcon from "../Components/Assets/cart_icon.png";
 import { Link } from "react-router-dom";
-import { ShopContext } from "../Context/ShopContext";
+import { getdefaultCart, ShopContext } from "../Context/ShopContext";
 import menu from "../Components/Assets/menu.svg";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -11,9 +11,11 @@ import Cookies from "js-cookie";
 import axios from "axios";
 
 
+
 function Navbar() {
     const { getTotalItem } = useContext(ShopContext);
     const [menuBar, setMenuBar] = useState(false);
+    const [token, setToken] = useState(null);
 
     const navRef = useRef(null);
 
@@ -57,24 +59,37 @@ function Navbar() {
     });
 
     const handleLogout = async () => {
-        await axios.post("https://vastra-ecommerce-backend-w9o9.onrender.com/api/user/logout", {
-            withCredentials: true
-        })
-            .then((res) => {
-                Cookies.remove("token");
-                window.location.reload();
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+        // await axios.post("https://vastra-ecommerce-backend-w9o9.onrender.com/api/user/logout", {
+        //     withCredentials: true
+        // })
+        //     .then((res) => {
+        //         localStorage.removeItem("token");
+
+        //         setToken(null); // if using context
+
+        //         window.location.reload();
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     })
+
+        localStorage.removeItem("token");
+
+        setToken(null); 
+        // setCartItems(getdefaultCart());
+
+        window.location.href = "/login";
     }
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        const token = Cookies.get("token"); // cookie name
+        const token = localStorage.getItem("token");
+
         if (token) {
             setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
         }
     }, []);
 

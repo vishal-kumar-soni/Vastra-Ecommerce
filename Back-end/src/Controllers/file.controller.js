@@ -38,9 +38,9 @@ const uploadOnCloudinary = async (req, res) => {
 
     } catch (error) {
 
-        if (req.file?.path && fs.existsSync(req.file.path)) {
-            fs.unlinkSync(req.file.path)
-        }
+        // if (req.file?.path && fs.existsSync(req.file.path)) {
+        //     fs.unlinkSync(req.file.path)
+        // }
 
         return res.status(500).json({
             success:false,
