@@ -1,7 +1,8 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 
 function Signup() {
     const initialCredential = {
@@ -22,7 +23,7 @@ function Signup() {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "https://vastra-ecommerce-backend-w9o9.onrender.com/api/user/signup",
+                `${BACKEND_URL}/api/user/signup`,
                 { userName, email, password },
             );
  

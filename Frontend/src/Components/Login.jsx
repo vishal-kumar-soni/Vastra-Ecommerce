@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 import { ShopContext } from "../Context/ShopContext.jsx";
 
@@ -14,13 +15,13 @@ function Login() {
         setCredential({ ...credential, [e.target.name]: e.target.value });
     };
 
-    const { email, password } = credential;
+    const { email, password } = credential; 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "https://vastra-ecommerce-backend-w9o9.onrender.com/api/user/login",
+                `${BACKEND_URL}/api/user/login`,
                 { email, password },
             );
 
