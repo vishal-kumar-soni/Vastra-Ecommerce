@@ -24,7 +24,6 @@ function Login() {
                 { email, password },
             );
 
-            console.log("This is the cart data after login",response.data.user.cartData)
             if (response.data.success) {
                 localStorage.setItem("token", response.data.token);
                 setToken(response.data.token);
@@ -33,7 +32,7 @@ function Login() {
                 window.location.href = "/";
             }
         } catch (error) {
-            console.log("FULL ERROR:", error);
+            console.log(error);
             alert(error.response?.data?.message || error.message); 
         }
     };

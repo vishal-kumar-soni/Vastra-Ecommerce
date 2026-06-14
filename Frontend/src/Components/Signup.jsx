@@ -25,10 +25,9 @@ function Signup() {
                 "http://localhost:4000/api/user/signup",
                 { userName, email, password },
             );
-
-            console.log("the signup response is---->",response)
-
+ 
             if (response.data.success) {
+                localStorage.setItem("token", response.data.token);
                 alert(' ✅ ' + "You are successfully registered");
                 window.location.href = "/";
             }

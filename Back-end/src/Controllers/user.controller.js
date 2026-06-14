@@ -65,80 +65,61 @@ const login = async (req, res) => {
 
 // Function to Register a user
 const registerUser = async (req, res) => {
-
-    // 1. Get user details from frontend ( or from postman).
-    // 2. Check if user already exist.
-    // 3. Created size 200 cartData
-    // 4. Creating user by userModel.create (CRUD) to store in database.
-    // 5. Generate the cookie
-    // 6. Remove password and refresh token field from response. 
-    // 7. Check for user creation- if true then return res.
-
-
-    const { email, userName, password } = req.body; //1
+    const { email, userName, password } = req.body;
 
     try {
-        const existedUser = await UserModel.findOne({ email }) //2
+        const existedUser = await UserModel.findOne({ email });
+
         if (existedUser) {
             return res.status(400).json({
                 success: false,
-                message: "User already exist with this email ",
-            })
+                message: "User already exists with this email",
+            });
         }
 
-        let cart = {}; //3
+        let cart = {};
+
         for (let i = 0; i < 50; i++) {
             cart[i] = 0;
         }
 
-        const user = await UserModel.create({ //4
+        const user = await UserModel.create({
             email,
             password,
             userName,
             cartData: cart,
-        })
-
-        const token = jwt.sign( //5
-            { userId: user.id, email: user.email },
-            process.env.SECRET,
-            { expiresIn: "1d" }
-        )
-
-
-        return res.status(200).json({
-            success: true,
-            message: "Successfully login",
-            token,
-            user: userResponse,
         });
 
+        const token = jwt.sign(
+            {
+                userId: user._id,
+                email: user.email,
+            },
+            process.env.SECRET,
+            {
+                expiresIn: "1d",
+            }
+        );
 
-        const createdUser = await UserModel.findById(user.id).select( //6
-            "-password "
-        )
-
-        if (!createdUser) {
-            return res.status(500).json({
-                success: false,
-                message: "user could not be created",
-            })
-        }
+        const createdUser = await UserModel.findById(user._id)
+            .select("-password");
 
         return res.status(201).json({
             success: true,
             message: "User registered successfully",
             token,
-            createdUser
+            user: createdUser,
         });
 
     } catch (error) {
+        console.error(error);
+
         return res.status(500).json({
-            error: error,
             success: false,
             message: "Something went wrong while registering user",
-        })
+        });
     }
-}
+};
 
 // Function to logout a user
 const logout = async (req, res) => {

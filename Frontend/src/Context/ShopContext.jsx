@@ -22,7 +22,6 @@ const ShopContextProvider = (props) => {
         const getProducts = async () => {
 
             const savedToken = localStorage.getItem("token");
-            console.log("This is saved token", savedToken)
 
             try {
                 const response = await axios.get(
@@ -31,9 +30,8 @@ const ShopContextProvider = (props) => {
 
                 setAllProducts(response.data.data);
 
-                console.log("all product in context---", response.data.data)
             } catch (error) {
-                console.log("getallproducts-----", error);
+                console.log(error.message);
             }
 
 
@@ -50,9 +48,6 @@ const ShopContextProvider = (props) => {
                     }
                 );
 
-                console.log("TYPE:", typeof cartResponse.data.cartData);
-                console.log(cartResponse.data.cartData);
-
                 setCartItems(cartResponse.data.cartData);
 
             } else {
@@ -63,19 +58,9 @@ const ShopContextProvider = (props) => {
         getProducts();
     }, []);
 
-    useEffect(() => {
-        console.log("UPDATED CART STATE", cartItems);
-    }, [cartItems]);
-
-    useEffect(() => {
-        console.log("Products Loaded:", allProducts.length);
-        console.log("Cart Loaded:", cartItems);
-    }, [allProducts, cartItems]);
-
 
     const addToCart = async (itemId) => {
         const authToken = localStorage.getItem("token");
-        console.log(authToken, "------auto token in add to cart context----and Item id is ", itemId)
 
         try {
             const response = await axios.post(
@@ -88,15 +73,12 @@ const ShopContextProvider = (props) => {
                 },
             );
 
-            console.log("This is the add to cart Response---", response)
-
             if (response.data.success) {
                 setCartItems(response.data.cartData);
             }
         } catch (error) {
             console.error(error);
             alert("Please login first");
-
         }
     };
 
@@ -131,12 +113,12 @@ const ShopContextProvider = (props) => {
                 let itemInfo = allProducts.find(
                     (product) => product.id === Number(item),
                 );
-                totalAmount += 10 * cartItems[item];
-                // totalAmount += itemInfo.new_price * cartItems[item];
+                totalAmount += itemInfo.new_price * cartItems[item];
             }
         }
         return totalAmount;
     };
+    
     const getTotalItem = () => {
         let totalItem = 0;
         for (const item in cartItems) {
