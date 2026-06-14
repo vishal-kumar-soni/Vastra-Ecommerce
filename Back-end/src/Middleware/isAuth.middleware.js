@@ -32,7 +32,6 @@ const isAuth = async (req, res, next) => {
     }
 
     req.user = user;
-    console.log("isAuth user ", req.user)
     next();
 
   } catch (error) {

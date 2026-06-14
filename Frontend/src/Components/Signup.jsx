@@ -22,9 +22,11 @@ function Signup() {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "https://vastra-ecommerce-backend-w9o9.onrender.com/api/user/signup",
+                "http://localhost:4000/api/user/signup",
                 { userName, email, password },
             );
+
+            console.log("the signup response is---->",response)
 
             if (response.data.success) {
                 alert(' ✅ ' + "You are successfully registered");

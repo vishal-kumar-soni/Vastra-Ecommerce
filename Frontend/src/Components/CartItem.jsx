@@ -28,6 +28,7 @@ function CartItem() {
                         </div>
 
                         {allProducts.map((item) => {
+                          
                             if (cartItems[item.id] > 0) {
                                 return (
                                     <div key={item.id} className='group bg-white rounded-3xl p-5 mb-4 shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)] border border-white hover:border-[#059669]/30 transition-all duration-300'>

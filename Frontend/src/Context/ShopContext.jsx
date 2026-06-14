@@ -12,6 +12,7 @@ const getdefaultCart = () => {
     return cart;
 };
 
+
 const ShopContextProvider = (props) => {
     const [allProducts, setAllProducts] = useState([]);
     const [cartItems, setCartItems] = useState(getdefaultCart());
@@ -25,11 +26,14 @@ const ShopContextProvider = (props) => {
 
             try {
                 const response = await axios.get(
-                    "https://vastra-ecommerce-backend-w9o9.onrender.com/api/product/getallproducts",
+                    "http://localhost:4000/api/product/getallproducts",
                 );
+
                 setAllProducts(response.data.data);
+
+                console.log("all product in context---", response.data.data)
             } catch (error) {
-                console.log(error);
+                console.log("getallproducts-----", error);
             }
 
 
@@ -37,7 +41,7 @@ const ShopContextProvider = (props) => {
                 setToken(savedToken);
 
                 const cartResponse = await axios.post(
-                    "https://vastra-ecommerce-backend-w9o9.onrender.com/api/product/getcart",
+                    "http://localhost:4000/api/product/getcart",
                     {},
                     {
                         headers: {
@@ -46,19 +50,28 @@ const ShopContextProvider = (props) => {
                     }
                 );
 
-                console.log("This is rhe cart Response---", cartResponse)
+                console.log("TYPE:", typeof cartResponse.data.cartData);
+                console.log(cartResponse.data.cartData);
 
-                console.log("succ", cartResponse.data)
-                setCartItems(cartResponse.data);
+                setCartItems(cartResponse.data.cartData);
 
-                console.log("This is the cart item---", cartItems)
             } else {
-                console.log("No token found in localStoragefdhgfrnhn");
+                console.log("No token found in localStorage");
             }
         };
 
         getProducts();
     }, []);
+
+    useEffect(() => {
+        console.log("UPDATED CART STATE", cartItems);
+    }, [cartItems]);
+
+    useEffect(() => {
+        console.log("Products Loaded:", allProducts.length);
+        console.log("Cart Loaded:", cartItems);
+    }, [allProducts, cartItems]);
+
 
     const addToCart = async (itemId) => {
         const authToken = localStorage.getItem("token");
@@ -66,7 +79,7 @@ const ShopContextProvider = (props) => {
 
         try {
             const response = await axios.post(
-                "https://vastra-ecommerce-backend-w9o9.onrender.com/api/product/addcart",
+                "http://localhost:4000/api/product/addcart",
                 { itemId },
                 {
                     headers: {
@@ -92,7 +105,7 @@ const ShopContextProvider = (props) => {
         const authToken = localStorage.getItem("token");
         try {
             const response = await axios.post(
-                "https://vastra-ecommerce-backend-w9o9.onrender.com/api/product/removecart",
+                "http://localhost:4000/api/product/removecart",
                 { itemId: itemId }, // request body
                 {
                     headers: {
@@ -118,7 +131,8 @@ const ShopContextProvider = (props) => {
                 let itemInfo = allProducts.find(
                     (product) => product.id === Number(item),
                 );
-                totalAmount += itemInfo.new_price * cartItems[item];
+                totalAmount += 10 * cartItems[item];
+                // totalAmount += itemInfo.new_price * cartItems[item];
             }
         }
         return totalAmount;

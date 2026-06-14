@@ -184,10 +184,9 @@ const getCart = async (req, res) => {
                 message: "User not found"
             });
         }
-
-        return res.status(201).json({
+        return res.status(200).json({
             success: true,
-            cartData: user.cartItems,
+            cartData: user.cartData,
             message:"cart is get"
         });
 
