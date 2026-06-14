@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import upload from "../components/Assets/upload-image.png";
 import axios from "axios";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 
 function AddProducts() {
 
@@ -41,7 +43,7 @@ function AddProducts() {
             formData.append("image", image);
 
             const response = await axios.post(
-                "https://vastra-ecommerce-backend-w9o9.onrender.com/api/file/upload",
+                `${BACKEND_URL}/api/file/upload`,
                 formData
             );
 
@@ -59,7 +61,7 @@ function AddProducts() {
             };
 
             const { data } = await axios.post(
-                "https://vastra-ecommerce-backend-w9o9.onrender.com/api/product/addproducts",
+                `${BACKEND_URL}/api/product/addproducts`,
                 product,
                 {
                     headers: {

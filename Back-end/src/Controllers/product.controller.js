@@ -66,9 +66,6 @@ const removeProduct = async (req, res) => {
             message: "Could not remove the product",
         })
     }
-
-
-
 }
 
 

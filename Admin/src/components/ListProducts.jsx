@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { RxCross2 } from "react-icons/rx";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 
 function ListProducts() {
@@ -8,7 +9,7 @@ function ListProducts() {
 
   // fetch all products
   const fetchAllProducts = async () => {
-    const response = await axios.get('https://vastra-ecommerce-backend-w9o9.onrender.com/api/product/getallproducts')
+    const response = await axios.get(`${BACKEND_URL}/api/product/getallproducts`)
     setAllProducts(response.data.data)
   }
 
@@ -19,7 +20,7 @@ function ListProducts() {
 
   // Remove Product
   const removeProduct = async (id) => {
-     await axios.post('https://vastra-ecommerce-backend-w9o9.onrender.com/api/product/removeproduct', { id: id })
+     await axios.post(`${BACKEND_URL}/api/product/removeproduct`, { id: id })
 
     fetchAllProducts()
   }

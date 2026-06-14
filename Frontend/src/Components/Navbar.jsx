@@ -59,24 +59,9 @@ function Navbar() {
     });
 
     const handleLogout = async () => {
-        // await axios.post("https://vastra-ecommerce-backend-w9o9.onrender.com/api/user/logout", {
-        //     withCredentials: true
-        // })
-        //     .then((res) => {
-        //         localStorage.removeItem("token");
-
-        //         setToken(null); // if using context
-
-        //         window.location.reload();
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //     })
-
         localStorage.removeItem("token");
 
         setToken(null); 
-        // setCartItems(getdefaultCart());
 
         window.location.href = "/login";
     }
