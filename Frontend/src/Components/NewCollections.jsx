@@ -11,7 +11,6 @@ function NewCollections() {
 
     const cardsRef = useRef([]);
 
-
     useGSAP(() => {
 
         gsap.from(".newCotionsH1", {

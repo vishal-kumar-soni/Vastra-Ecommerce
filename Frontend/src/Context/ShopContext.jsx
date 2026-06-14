@@ -25,7 +25,7 @@ const ShopContextProvider = (props) => {
 
             try {
                 const response = await axios.get(
-                    "http://localhost:4000/api/product/getallproducts",
+                    "https://vastra-ecommerce-backend-w9o9.onrender.com/api/product/getallproducts",
                 );
 
                 setAllProducts(response.data.data);
@@ -39,7 +39,7 @@ const ShopContextProvider = (props) => {
                 setToken(savedToken);
 
                 const cartResponse = await axios.post(
-                    "http://localhost:4000/api/product/getcart",
+                    "https://vastra-ecommerce-backend-w9o9.onrender.com/api/product/getcart",
                     {},
                     {
                         headers: {
@@ -64,7 +64,7 @@ const ShopContextProvider = (props) => {
 
         try {
             const response = await axios.post(
-                "http://localhost:4000/api/product/addcart",
+                "https://vastra-ecommerce-backend-w9o9.onrender.com/api/product/addcart",
                 { itemId },
                 {
                     headers: {
@@ -87,7 +87,7 @@ const ShopContextProvider = (props) => {
         const authToken = localStorage.getItem("token");
         try {
             const response = await axios.post(
-                "http://localhost:4000/api/product/removecart",
+                "https://vastra-ecommerce-backend-w9o9.onrender.com/api/product/removecart",
                 { itemId: itemId }, // request body
                 {
                     headers: {
@@ -118,7 +118,7 @@ const ShopContextProvider = (props) => {
         }
         return totalAmount;
     };
-    
+
     const getTotalItem = () => {
         let totalItem = 0;
         for (const item in cartItems) {
