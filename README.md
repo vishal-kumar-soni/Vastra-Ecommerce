@@ -72,7 +72,7 @@ Vashtra-Ecommerce/
 ## 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/vishalkumar2024/Vastra-Ecommerce.git
+git clone https://github.com/vishal-kumar-soni/Vastra-Ecommerce.git
 ```
 
 ---
@@ -179,7 +179,7 @@ If you'd like to contribute:
 
 👨‍💻 Vishal Kumar Soni
 
-- GitHub: :https://github.com/vishalkumar2024
+- GitHub: :https://github.com/vishal-kumar-soni
 - LinkedIn:https://www.linkedin.com/in/vishal-kumar-soni-/
 - Email: vkumarsoni30@gmail.com
 
