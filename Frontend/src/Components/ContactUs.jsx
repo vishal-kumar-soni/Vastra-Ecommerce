@@ -21,9 +21,7 @@ const ContactUs = () => {
 
     return (
         <section
-            className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 via-white to-emerald-100 px-6 pt-20 pb-20 overflow-hidden"
-        >
-            {/* Background Glow */}
+            className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 via-white to-emerald-100 px-6 pt-20 pb-20 overflow-hidden">
             <div className="absolute -top-24 -left-24 w-[400px] h-[400px] bg-emerald-300/30 blur-[120px]" />
             <div className="absolute -bottom-24 -right-24 w-[400px] h-[400px] bg-emerald-400/20 blur-[120px]" />
 

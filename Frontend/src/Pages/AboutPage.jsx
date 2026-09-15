@@ -1,4 +1,3 @@
-import React from 'react'
 import About from '../Components/About'
 import Navbar from '../Components/Navbar'
 import CustomerReviews from '../Components/CustomerReviews'

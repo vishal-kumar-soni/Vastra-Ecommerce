@@ -62,16 +62,14 @@ const About = () => {
     <>
       <section
         ref={sectionRef}
-        className="relative overflow-hidden bg-gradient-to-br from-[#ecfff7] via-white to-[#d9fff0] pt-[100px] pb-[100px] "
-      >
-        {/* BACKGROUND BLUR ORB */}
+        className="relative overflow-hidden bg-gradient-to-br from-[#ecfff7] via-white to-[#d9fff0] pt-[100px] pb-[100px] ">
         <div className="absolute -top-24 -left-24 w-[400px] h-[400px] bg-emerald-300/30 blur-[120px]" />
 
         <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
 
           {/* LEFT CONTENT */}
           <div>
-            <p className="text-cyan-600 font-semibold  text-3xl tracking-[0.2em] uppercase mb-6">
+            <p className="text-cyan-600 font-semibold text-3xl tracking-[0.2em] uppercase mb-6">
               About VASTRA
             </p>
 
@@ -96,14 +94,15 @@ const About = () => {
                 Our Story
               </button>
             </div>
+            
           </div>
 
           {/* RIGHT VISUAL */}
-          <div className="relative   flex justify-center">
+          <div className="relative flex justify-center">
             <div className="about-img  rounded-[2.5rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)]">
               <img
                 src="https://img.freepik.com/free-photo/shop-clothing-clothes-shop-hanger-modern-shop-boutique_1150-8886.jpg?semt=ais_hybrid&w=740&q=80"
-                alt="Fashion"
+                alt="Fashion-Image"
                 className="w-[420px] h-[400px] object-cover"
               />
             </div>
@@ -120,6 +119,7 @@ const About = () => {
                 <p className="text-sm text-gray-500">Years of<br />Experience</p>
               </div>
             </div>
+            
           </div>
         </div>
       </section>

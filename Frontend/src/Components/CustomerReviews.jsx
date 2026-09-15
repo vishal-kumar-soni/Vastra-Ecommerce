@@ -1,4 +1,3 @@
-import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
@@ -101,7 +100,6 @@ const TestimonialSection = () => {
                                 {[...Array(review.rating)].map((_, i) => (
                                     <Star key={i} size={18} fill="#facc15" color="#facc15" />
                                 ))}
-                                
                             </div>
 
                             <p className="text-gray-600 leading-relaxed italic">

@@ -1,7 +1,5 @@
-import React from 'react'
 import AllProducts from '../Components/AllProducts'
 import Navbar from '../Components/Navbar'
-
 
 
 function AllProductsPage() {
