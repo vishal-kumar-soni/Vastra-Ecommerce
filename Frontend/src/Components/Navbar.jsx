@@ -3,12 +3,10 @@ import Logo from "../Components/Assets/logoshoping.png";
 import "./Button.css";
 import CartIcon from "../Components/Assets/cart_icon.png";
 import { Link } from "react-router-dom";
-import { getdefaultCart, ShopContext } from "../Context/ShopContext";
+import {ShopContext } from "../Context/ShopContext";
 import menu from "../Components/Assets/menu.svg";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import Cookies from "js-cookie";
-import axios from "axios";
 
 
 

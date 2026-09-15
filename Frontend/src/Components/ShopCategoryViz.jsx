@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import  { useRef } from "react";
 import './ShopCategoryViz.css'
 import { IoWomanSharp } from "react-icons/io5";
 import { GiClothes } from "react-icons/gi";
@@ -88,7 +88,7 @@ function ShopCategoryViz() {
 
                 {
                     data.map((item, i) => {
-                        return <div key={item.id} id="ShopCategoryVizItem" className='' ref={(el) => (cardsRef.current[i] = el)}>
+                        return <div key={item.id} id="ShopCategoryVizItem" ref={(el) => (cardsRef.current[i] = el)}>
                             <Link to={`/${item.path}`}>
                                 <div id="innerDiv" className="h-[100px]  cursor-pointer">
                                     <div id="innerDivIcon" className="  size-18 border-2 px-[9px] py-2 border-cyan-500 rounded-full ">

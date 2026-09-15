@@ -64,10 +64,10 @@ function Main() {
             <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-emerald-200/40 rounded-full blur-[120px]" />
             <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-teal-200/40 rounded-full blur-[120px]" />
 
-            <div className="relative z-10  grid grid-cols-1 lg:grid-cols-2 items-center px-[8%] pt-32 pb-24 gap-20 max-sm:pt-20">
+            <div className="relative z-10  grid grid-cols-1 lg:grid-cols-2 items-center px-[8%] pt-32 pb-24 gap-20 max-sm:pt-20"> 
 
                 {/* TEXT */}
-                <div className=''>
+                <div>
                     <h1 ref={title} className="text-6xl md:text-7xl font-extrabold text-gray-900 leading-tight max-sm:text-5xl">
                         Redefining <br />
                         <span className="text-emerald-600">Everyday Fashion</span>

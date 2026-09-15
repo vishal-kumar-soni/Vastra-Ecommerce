@@ -42,9 +42,6 @@ function NewsLetter() {
             <h1 id="newsletterH1" className='text-[#454545] capitalize text-[50px] font-semibold max-lg:text-[35px] max-md:text-[30px] max-sm:text-[25px] '>Get exclusive offers on your email</h1>
             <p id="newslaterPara" className='text-[#454545] text-[20px] font-mono max-lg:text-[19px] max-md:text-[17px] max-sm:text-[16px]'>Subscribe to our newsletter and stay updated</p>
             <form
-                action="/newslater"
-                method="post"
-                id="form"
                 className='flex items-center justify-between w-[730px] h-[70px] text-white rounded-4xl border border-[#b9b2b2] max-lg:w-[580px] max-lg:h-[50px] max-md:w-[450px] max-sm:w-[370px] max-sm:h-[40px] '>
                 <input
                     type="text"

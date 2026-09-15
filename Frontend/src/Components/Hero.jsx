@@ -1,4 +1,3 @@
-import React from 'react'
 import handIcon from "../Components/Assets/hand_icon.png"
 import arrowIcon from "../Components/Assets/arrow.png"
 import heroImage from "../Components/Assets/hero_image.png"
