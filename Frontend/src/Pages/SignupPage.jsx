@@ -1,7 +1,5 @@
-import React from 'react'
 import Signup from '../Components/Signup'
 import Navbar from '../Components/Navbar'
-
 
 
 function SignupPage() {
