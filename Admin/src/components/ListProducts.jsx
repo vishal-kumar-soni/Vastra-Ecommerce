@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { RxCross2 } from "react-icons/rx";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;

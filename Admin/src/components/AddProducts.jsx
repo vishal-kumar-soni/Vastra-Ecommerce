@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import upload from "../components/Assets/upload-image.png";
 import axios from "axios";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -26,7 +26,7 @@ function AddProducts() {
     };
 
     const handleUpload = (e) => {
-        setImage(e.target.files[0]);
+        setImage(e.target.files[0]); 
     };
 
     const handleAddProduct = async () => {
