@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { ShopContext } from '../Context/ShopContext'
+import { ShopContext } from '../Context/ShopContext.jsx'
 import { useParams } from 'react-router-dom';
 import Breadcrumbs from '../Components/Breadcrumbs';
 import ProductDisplay from '../Components/ProductDisplay';
@@ -9,21 +9,27 @@ import Navbar from '../Components/Navbar';
 
 function Product() {
   const { allProducts } = useContext(ShopContext);
+
   const { productId } = useParams();
   const product = allProducts.find((e) => e.id === Number(productId))
 
   return (
     <>
-
       <Navbar />
-      <div className="pt-[82px]">
-        <Breadcrumbs product={product} />
-        <ProductDisplay product={product} />
-        <Description />
-        <RelatedProducts product={product} />
 
-      </div>
+      {product ? (
+        <div className="pt-[82px]">
+          <Breadcrumbs product={product} />
+          <ProductDisplay product={product} />
+          <Description />
+          <RelatedProducts product={product} />
+
+        </div>
+      ) : (
+        <p>Loading product...</p>
+      )}
     </>
+
   )
 }
 
