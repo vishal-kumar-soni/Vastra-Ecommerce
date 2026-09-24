@@ -20,9 +20,9 @@ const reviews = [
         name: "Rajesh Mehta",
         role: "Student",
         image: "https://images.unsplash.com/photo-1530268729831-4b0b9e170218?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aW5kaWFuJTIwbWVufGVufDB8fDB8fHww",
-        rating: 5,
+        rating: 4,
         text: "VASTRA is my go-to for formal wear. Their shirts have a great finish and the delivery is always on time. The packaging was eco-friendly too, which is a huge plus for me!",
-    }, 
+    },
     {
         id: 3,
         name: "John Doe",
@@ -97,8 +97,13 @@ const TestimonialSection = () => {
                             </div>
 
                             <div className="flex gap-1 mb-4">
-                                {[...Array(review.rating)].map((_, i) => (
-                                    <Star key={i} size={18} fill="#facc15" color="#facc15" />
+                                {Array.from({ length: 5 }, (_, i) => (
+                                    <Star
+                                        key={i}
+                                        size={18}
+                                        fill={i < review.rating ? "#facc15" : "none"}
+                                        color="#facc15"
+                                    />
                                 ))}
                             </div>
 
