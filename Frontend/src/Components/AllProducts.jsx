@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { ShopContext } from "../Context/ShopContext";
 import Item from "./Item";
 
@@ -6,7 +6,16 @@ import Item from "./Item";
 const AllProducts = () => {
     const { allProducts } = useContext(ShopContext);
 
+    if (!allProducts || allProducts.length==0) {
+        return (
+            <div className=" flex flex-col items-center justify-center min-h-screen gap-4">
+                <div className="w-16 h-16 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
+                <p className="text-gray-400 text-sm">Loading....</p>
+            </div>
+        )
+    }
     return (
+    <>
         <section
             className="relative min-h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-100 py-20 px-6"
         >
@@ -36,6 +45,7 @@ const AllProducts = () => {
                 ))}
             </div>
         </section>
+    </>
     );
 };
 

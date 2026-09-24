@@ -2,12 +2,36 @@ import { useContext, useEffect, useRef, useState } from "react";
 import Logo from "../Components/Assets/logoshoping.png";
 import "./Button.css";
 import CartIcon from "../Components/Assets/cart_icon.png";
-import { Link } from "react-router-dom";
-import {ShopContext } from "../Context/ShopContext";
+import { NavLink, Link } from "react-router-dom";
+import { ShopContext } from "../Context/ShopContext";
 import menu from "../Components/Assets/menu.svg";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 
+
+
+const navLinks = [
+    {
+        id: 1,
+        name: "Home",
+        link: '/',
+    },
+    {
+        id: 2,
+        name: "Products",
+        link: '/allproducts',
+    },
+    {
+        id: 3,
+        name: "About",
+        link: '/about',
+    },
+    {
+        id: 4,
+        name: "Contact",
+        link: '/contact',
+    },
+]
 
 
 function Navbar() {
@@ -59,7 +83,7 @@ function Navbar() {
     const handleLogout = async () => {
         localStorage.removeItem("token");
 
-        setToken(null); 
+        setToken(null);
 
         window.location.href = "/login";
     }
@@ -93,31 +117,28 @@ function Navbar() {
 
             <div className=" w-[60%] flex gap-40  max-xl:gap-32 max-lg:gap-20 max-md:hidden">
                 <ul className="w-[50%] flex items-center gap-10 text-gray-500 text-[20px] outlin-none font-semibold max-lg:gap-6">
-                    <li
-                        id="id"
-                        className="cursor-pointer active:text-red-300   max-lg:text-[16px]  "
-                    >
-                        <Link to="/">Home</Link>{" "}
-                    </li>
-                    <li
-                        id="id"
-                        className="cursor-pointer active:text-red-300   max-lg:text-[16px] hover:translate-y-[10px] "
-                    >
-                        <Link to="/allproducts">Products</Link>
-                    </li>
-                    <li
-                        id="id"
-                        className="cursor-pointer  active:text-red-300   max-lg:text-[16px] hover:translate-y-[10px] "
-                    >
-                        <Link to="/about">About</Link>{" "}
-                    </li>
-                    <li
-                        id="id"
-                        className="cursor-pointer active:text-red-300   max-lg:text-[16px] hover:translate-y-[10px]"
-                    >
-                        <Link to="/contact">Contact</Link>
-                    </li>
+                    {
+                        navLinks.map((navLink, idx) => {
+                            return <li
+                                key={idx}
+                                id="id"
+                                className={`cursor-pointer  max-lg:text-[16px]  `}
+                            >
+                                <NavLink
+                                    to={navLink.link}
+                                    className={({ isActive }) =>
+                                        `cursor-pointer ${isActive ? " text-red-300" : ""
+                                        }`
+                                    }
+                                >
+                                    {navLink.name}
+                                </NavLink>
+
+                            </li>
+                        })
+                    }
                 </ul>
+
                 <div className="flex items-center gap-10 max-lg:gap-6">
                     {isLoggedIn ? (
                         <Link id="loginIcon" to="/login">
@@ -190,22 +211,22 @@ function Navbar() {
                     className={`${menuBar ? "fixed" : "hidden"} bg-[#74f5dfe7] p-2.5 mt-4.5  md:hidden max-sm:w-[120px] `}
                 >
                     <ul>
-                        <Link to="/allproducts" onClick={() => setMenuBar(false)}>
-                            {" "}
-                            <li className="h-10 w-[120px] py-2 px-3 hover:bg-[#d4fbf3] max-sm:w-[100%] ">
-                                Products
-                            </li>
-                        </Link>
-                        <Link to="/about" onClick={() => setMenuBar(false)}>
-                            <li className="h-10 w-[120px] py-2 px-3 hover:bg-[#d4fbf3] max-sm:w-[100%] ">
-                                About
-                            </li>
-                        </Link>
-                        <Link to="/contact" onClick={() => setMenuBar(false)}>
-                            <li className="h-10 w-[120px] py-2 px-3 hover:bg-[#d4fbf3] max-sm:w-[100%] ">
-                                Contact
-                            </li>
-                        </Link>
+                        {
+                            navLinks.map((navLink, idx) => {
+                                return <>
+                                    <NavLink key={idx} to={navLink.link} className={({ isActive }) =>
+                                        `cursor-pointer ${isActive ? " text-red-400" : ""
+                                        }`
+                                    }>
+                                        {""}
+                                        <li className="h-10 w-[120px] py-1.5 px-3 hover:bg-[#d4fbf3] max-sm:w-[100%] ">
+                                            {navLink.name}
+                                        </li>
+
+                                    </NavLink>
+                                </>
+                            })
+                        }
 
                         {isLoggedIn ? (
                             <Link to="/login">

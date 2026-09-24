@@ -72,7 +72,6 @@ const removeProduct = async (req, res) => {
 // Function to fetch all the products
 const getAllProducts = async (req, res) => {
     try {
-        console.log("get all the products")
         const products = await FileModel.find()
 
         return res.status(200).json({
