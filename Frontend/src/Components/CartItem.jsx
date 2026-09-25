@@ -70,9 +70,9 @@ function CartItem() {
 
                                                 {/* Total */}
                                                 <div className='text-right sm:text-center'>
-                                                    <span className='sm:hidden block text-[10px] font-bold text-[#059496] uppercase'>Total</span>
+                                                    <span className='sm:hidden block text-[4px] font-bold text-[#059496] uppercase'>Total</span>
                                                     <p className='font-black text-[#059496] text-base sm:text-lg'>
-                                                        ${item.new_price * cartItems[item.id]}
+                                                        ${(item.new_price * cartItems[item.id]).toFixed(2) }
                                                     </p>
                                                 </div>
 
@@ -101,7 +101,7 @@ function CartItem() {
                             <div className='space-y-4'>
                                 <div className='flex justify-between text-gray-500 font-medium'>
                                     <p>Subtotal</p>
-                                    <p className='text-gray-900'>${getTotalAmount()}</p>
+                                    <p className='text-gray-900'>${getTotalAmount().toFixed(3)}</p>
                                 </div>
                                 <div className='flex justify-between text-gray-500 font-medium'>
                                     <p>Shipping Fee</p>
@@ -110,7 +110,7 @@ function CartItem() {
                                 <div className='h-[1px] bg-gray-100 my-4'></div>
                                 <div className='flex justify-between items-center'>
                                     <p className='text-lg font-black text-gray-900 uppercase'>Total</p>
-                                    <p className='text-2xl font-black text-[#059496]'>${getTotalAmount()}</p>
+                                    <p className='text-2xl font-black text-[#059496]'>${getTotalAmount().toFixed(3)}</p>
                                 </div>
                             </div>
 
