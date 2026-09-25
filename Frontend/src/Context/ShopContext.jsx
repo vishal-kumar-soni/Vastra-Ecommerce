@@ -16,6 +16,8 @@ const getdefaultCart = () => {
 
 const ShopContextProvider = (props) => {
     const [allProducts, setAllProducts] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [productPerPage, setProductPerPage] = useState(8);
     const [cartItems, setCartItems] = useState(getdefaultCart());
     const [token, setToken] = useState(null);
 
@@ -132,6 +134,10 @@ const ShopContextProvider = (props) => {
 
     const contextValue = {
         allProducts,
+        currentPage,
+        setCurrentPage,
+        productPerPage,
+        setProductPerPage,
         cartItems,
         token,
         setToken,

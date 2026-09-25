@@ -1,10 +1,16 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { ShopContext } from "../Context/ShopContext";
 import Item from "./Item";
+import Pagination from "./Pagination";
 
 
 const AllProducts = () => {
-    const { allProducts } = useContext(ShopContext);
+    const { allProducts, currentPage, setCurrentPage, productPerPage } = useContext(ShopContext);
+
+    const lastProductIndex =  currentPage*productPerPage;
+    const startProductIndex =  lastProductIndex - productPerPage;
+    const currentProducts = allProducts.slice(startProductIndex, lastProductIndex);
+    console.log("curren page is -- ",currentPage)
 
     if (!allProducts || allProducts.length==0) {
         return (
@@ -17,7 +23,7 @@ const AllProducts = () => {
     return (
     <>
         <section
-            className="relative min-h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-100 py-20 px-6"
+            className="relative min-h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-100 pt-20 px-6"
         >
             {/* Decorative Blur */}
             <div className="absolute -top-32 -left-32 w-[420px] h-[420px] bg-emerald-300/30 blur-[140px]" />
@@ -32,7 +38,7 @@ const AllProducts = () => {
 
             {/* Product Grid */}
             <div className="relative max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
-                {allProducts.map((item) => (
+                {currentProducts.map((item) => (
                     <div key={item.id} className="group">
                         <div
                             className=" flex justify-center rounded-3xl overflow-hidden  shadow-xl transition-all duration-500 group-hover:-translate-y-3 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.15)] pt-4 group-hover:bg-gradient-to-t  group-hover:from-black/7 group-hover:to-transparent max-xl:px-0 ">
@@ -43,6 +49,9 @@ const AllProducts = () => {
                         </div>
                     </div>
                 ))}
+            </div>
+            <div className="w-full h-[150px] flex-wrap flex justify-center items-center ">
+               <Pagination AllProductsLength={allProducts.length} productPerPage={productPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
             </div>
         </section>
     </>
