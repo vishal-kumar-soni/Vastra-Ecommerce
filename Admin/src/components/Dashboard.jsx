@@ -111,28 +111,28 @@ const Dashboard = () => {
             category: "T-Shirts",
             sold: 248,
             revenue: "₹3,22,400",
-            image: BestSelling1        
+            image: BestSelling1
         },
         {
             name: "White and blue Jacket",
             category: "Hoodies",
             sold: 186,
             revenue: "₹3,53,400",
-            image:BestSelling2,
+            image: BestSelling2,
         },
         {
             name: "Black-white Jacket",
             category: "Jackets",
             sold: 142,
             revenue: "₹3,54,958",
-            image:BestSelling3,
+            image: BestSelling3,
         },
         {
             name: "Light blue hoodie",
             category: "Pants",
             sold: 118,
             revenue: "₹1,88,682",
-            image:BestSelling4,
+            image: BestSelling4,
         },
     ];
 
@@ -198,11 +198,6 @@ const Dashboard = () => {
                 </div>
 
                 <div className="flex gap-3">
-                    <button className="flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 shadow-sm transition hover:border-cyan-300 hover:text-cyan-600">
-                        <Eye size={17} />
-                        View Store
-                    </button>
-
                     <Link to='/addproduct' className="flex items-center gap-2 rounded-xl bg-[#06b6d4] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0891b2]">
                         <Plus size={18} />
                         Add Product
@@ -560,63 +555,6 @@ const Dashboard = () => {
                             </div>
                         ))}
                     </div>
-                </div>
-            </div>
-
-            {/* LOW STOCK */}
-            <div className="mt-6 rounded-2xl border border-orange-100 bg-white shadow-sm">
-                <div className="flex items-center justify-between border-b border-orange-100 p-5">
-                    <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50">
-                            <AlertTriangle
-                                size={20}
-                                className="text-orange-500"
-                            />
-                        </div>
-
-                        <div>
-                            <h2 className="font-bold text-gray-900">
-                                Low Stock Alert
-                            </h2>
-
-                            <p className="text-xs text-gray-400">
-                                Products that need restocking
-                            </p>
-                        </div>
-                    </div>
-
-                    <button className="text-sm font-semibold text-orange-500 hover:text-orange-600">
-                        Manage Inventory
-                    </button>
-                </div>
-
-                <div className="grid grid-cols-1 divide-y divide-orange-50 md:grid-cols-3 md:divide-x md:divide-y-0">
-                    {lowStock.map((product) => (
-                        <div
-                            key={product.name}
-                            className="flex items-center justify-between p-5"
-                        >
-                            <div>
-                                <h3 className="text-sm font-semibold text-gray-800">
-                                    {product.name}
-                                </h3>
-
-                                <p className="mt-1 text-xs text-gray-400">
-                                    {product.category}
-                                </p>
-                            </div>
-
-                            <div className="text-right">
-                                <p className="text-lg font-bold text-orange-500">
-                                    {product.stock}
-                                </p>
-
-                                <p className="text-[10px] text-gray-400">
-                                    units left
-                                </p>
-                            </div>
-                        </div>
-                    ))}
                 </div>
             </div>
         </div>

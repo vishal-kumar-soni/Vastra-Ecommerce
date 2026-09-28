@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import Logo from '../components/Assets/logoshoping.png'
-
+import AdminImage from '../components/Assets/admin.jpg'
 
 function Navabar() {
     return (
@@ -19,7 +19,7 @@ function Navabar() {
 
             {/* Admin profile */}
             <div id='profilePicture' className='flex items-center justify-center gap-3  '>
-                <img id='profilePicture-image' className='h-12 w-12 rounded-full max-lg:h-10 max-lg:w-10' src="https://images.unsplash.com/photo-1530268729831-4b0b9e170218?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aW5kaWFuJTIwbWVufGVufDB8fDB8fHww" alt="" />
+                <img id='profilePicture-image' className='h-12 w-12 rounded-full max-lg:h-10 max-lg:w-10' src={AdminImage} alt="" />
             </div>
         </div>
     )

@@ -100,6 +100,7 @@ function AddProducts() {
                     name="name"
                     value={productDetails.name}
                     onChange={onChangeHandler}
+                    required
                     placeholder="Type title"
                     className="text-gray-500 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-200 focus:border-gray-400 transition duration-200 w-full p-2"
                 />
@@ -118,6 +119,7 @@ function AddProducts() {
                         value={productDetails.old_price}
                         onChange={onChangeHandler}
                         placeholder="Type Price"
+                        required
                         className="text-gray-500 border-2 border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-200 focus:border-gray-400 transition duration-200 w-full p-2 rounded-md"
                     />
                 </div>
@@ -133,6 +135,7 @@ function AddProducts() {
                         value={productDetails.new_price}
                         onChange={onChangeHandler}
                         placeholder="Type Price"
+                        required
                         className="text-gray-500 border-2 border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-200 focus:border-gray-400 transition duration-200 w-full p-2 rounded-md"
                     />
                 </div>
@@ -149,6 +152,7 @@ function AddProducts() {
                     value={productDetails.category}
                     onChange={onChangeHandler}
                     name="category"
+                    required
                     className="text-gray-500 border-2 border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-200 focus:border-gray-400 transition duration-200 w-[80%] p-2 rounded-md"
                 >
                     <option value="men">Men</option>
