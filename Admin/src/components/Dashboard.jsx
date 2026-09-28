@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
     IndianRupee,
     ShoppingBag,
@@ -15,7 +16,10 @@ import {
     Plus,
     Eye,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import BestSelling1 from '../components/Assets/product_2.png';
+import BestSelling2 from '../components/Assets/product_14.png';
+import BestSelling3 from '../components/Assets/product_15.png';
+import BestSelling4 from '../components/Assets/product_25.png';
 
 
 
@@ -103,36 +107,32 @@ const Dashboard = () => {
 
     const bestProducts = [
         {
-            name: "Classic Oversized T-Shirt",
+            name: "Light Pink T-Shirt",
             category: "T-Shirts",
             sold: 248,
             revenue: "₹3,22,400",
-            image:
-                "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200&q=80",
+            image: BestSelling1        
         },
         {
-            name: "Relaxed Fit Hoodie",
+            name: "White and blue Jacket",
             category: "Hoodies",
             sold: 186,
             revenue: "₹3,53,400",
-            image:
-                "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=200&q=80",
+            image:BestSelling2,
         },
         {
-            name: "Slim Fit Denim Jacket",
+            name: "Black-white Jacket",
             category: "Jackets",
             sold: 142,
             revenue: "₹3,54,958",
-            image:
-                "https://images.unsplash.com/photo-1578681994506-b8f463449011?w=200&q=80",
+            image:BestSelling3,
         },
         {
-            name: "Cotton Cargo Pants",
+            name: "Light blue hoodie",
             category: "Pants",
             sold: 118,
             revenue: "₹1,88,682",
-            image:
-                "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=200&q=80",
+            image:BestSelling4,
         },
     ];
 
