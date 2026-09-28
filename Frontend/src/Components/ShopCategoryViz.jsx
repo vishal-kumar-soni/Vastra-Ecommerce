@@ -53,25 +53,25 @@ function ShopCategoryViz() {
         {
             id: 1,
             text: "All",
-            path: "",
+            path: "/",
             icon: <GiClothes />,
         },
         {
             id: 2,
             text: "Men",
-            path: "men",
+            path: "/men",
             icon: <IoIosMan />,
         },
         {
             id: 3,
             text: "Women",
-            path: "women",
+            path: "/women",
             icon: <IoWomanSharp />,
         },
         {
             id: 4,
             text: "Kids",
-            path: "kid",
+            path: "/kid",
             icon: <FaChild />,
         },
     ]
@@ -89,7 +89,7 @@ function ShopCategoryViz() {
                 {
                     data.map((item, i) => {
                         return <div key={item.id} id="ShopCategoryVizItem" ref={(el) => (cardsRef.current[i] = el)}>
-                            <Link to={`/${item.path}`}>
+                            <Link to={`${item.path}`}>
                                 <div id="innerDiv" className="h-[100px]  cursor-pointer">
                                     <div id="innerDivIcon" className="  size-18 border-2 px-[9px] py-2 border-cyan-500 rounded-full ">
                                         <span id="icon" className="text-[48px]   h-12 w-12 text-cyan-500">{item.icon}</span>

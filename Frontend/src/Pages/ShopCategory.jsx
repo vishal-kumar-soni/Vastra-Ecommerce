@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import { useContext, useRef } from "react";
 import { ShopContext } from "../Context/ShopContext";
 import Navbar from "../Components/Navbar";
 import Item from "../Components/Item";
@@ -48,6 +48,14 @@ function ShopCategory({ banner, category }) {
     });
   }, []);
 
+      if (!filteredProducts || filteredProducts.length==0) {
+        return (
+            <div className=" flex flex-col items-center justify-center min-h-screen gap-4">
+                <div className="w-16 h-16 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
+                <p className="text-gray-400 text-sm">Loading....</p>
+            </div>
+        )
+    }else
   return (
     <>
       <Navbar />

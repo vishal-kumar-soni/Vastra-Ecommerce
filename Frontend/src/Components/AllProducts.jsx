@@ -10,7 +10,6 @@ const AllProducts = () => {
     const lastProductIndex =  currentPage*productPerPage;
     const startProductIndex =  lastProductIndex - productPerPage;
     const currentProducts = allProducts.slice(startProductIndex, lastProductIndex);
-    console.log("curren page is -- ",currentPage)
 
     if (!allProducts || allProducts.length==0) {
         return (
@@ -19,7 +18,7 @@ const AllProducts = () => {
                 <p className="text-gray-400 text-sm">Loading....</p>
             </div>
         )
-    }
+    }else
     return (
     <>
         <section

@@ -70,7 +70,7 @@ const About = () => {
           {/* LEFT CONTENT */}
           <div>
             <p className="text-cyan-600 font-semibold text-3xl tracking-[0.2em] uppercase mb-6">
-              About VASTRA
+              About VASHTRA
             </p>
 
             <h2 className="headline text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight perspective-[1000px]">
@@ -78,7 +78,7 @@ const About = () => {
             </h2>
 
             <p className="mt-8 text-lg text-gray-600 leading-relaxed max-w-xl">
-              VASTRA blends minimalist aesthetics with premium craftsmanship.
+              VASHTRA blends minimalist aesthetics with premium craftsmanship.
               Every collection is thoughtfully designed to elevate everyday
               fashion into something iconic.
             </p>
