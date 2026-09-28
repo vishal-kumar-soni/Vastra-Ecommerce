@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Logo from '../components/Assets/logoshoping.png'
 
 
@@ -5,11 +6,13 @@ function Navabar() {
     return (
         <div className="flex justify-around bg-[#d1fff7] w-full z-50 shadow-sky-200 shadow max-md:justify-betwee">
 
-            <div id="logoImage" className='flex  justify-center gap-1 items-center max-md:ml-10'>
-                <img src={Logo} alt="Logo" className='w-20 h-18 max-lg:size-12' />
-                <p className='bg-gradient-to-r from-cyan-500 via-cyan-400 to-cyan-500 bg-clip-text text-transparent text-[30px] max-lg:text-[26px] font-extrabold'>VASHTRA </p>
-            </div>
- 
+            <Link to='/'>
+                <div id="logoImage" className='flex  justify-center gap-1 items-center max-md:ml-10'>
+                    <img src={Logo} alt="Logo" className='w-20 h-18 max-lg:size-12' />
+                    <p className='bg-gradient-to-r from-cyan-500 via-cyan-400 to-cyan-500 bg-clip-text text-transparent text-[30px] max-lg:text-[26px] font-extrabold'>VASHTRA </p>
+                </div>
+            </Link>
+
             <div id='adminPanel' className='flex justify-center items-center'>
                 <p className='text-[25px] font-semibold'>Admin Panel</p>
             </div>
