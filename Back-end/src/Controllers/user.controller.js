@@ -2,6 +2,7 @@ import { UserModel } from '../Models/user.model.js'
 import jwt from 'jsonwebtoken'
 
 
+
 // Function to login a user
 const login = async (req, res) => {
     const { email, password } = req.body;
@@ -32,24 +33,42 @@ const login = async (req, res) => {
             });
         }
 
-        const token = jwt.sign(
+        const accessToken = jwt.sign(
             {
                 userId: existedUser._id,
                 email: existedUser.email,
             },
-            process.env.SECRET,
+            process.env.ACCESSTOKEN_SECRET,
             {
-                expiresIn: "1d",
+                expiresIn: "15m",
+            }
+        );
+
+        const refreshToken = jwt.sign(
+            {
+                userId: existedUser._id,
+                email: existedUser.email,
+            },
+            process.env.REFRESHTOKEN_SECRET,
+            {
+                expiresIn: "7d",
             }
         );
 
         const userResponse = existedUser.toObject();
         delete userResponse.password;
 
+        res.cookie("refreshToken", refreshToken, {
+            httpOnly: true,
+            secure: false,
+            sameSite: "lax",
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+        });
+
         return res.status(200).json({
             success: true,
             message: "Successfully login",
-            token,
+            accessToken,
             user: userResponse,
         });
 
@@ -90,26 +109,46 @@ const registerUser = async (req, res) => {
             cartData: cart,
         });
 
-        const token = jwt.sign(
+        const accessToken = jwt.sign(
             {
                 userId: user._id,
                 email: user.email,
             },
-            process.env.SECRET,
+            process.env.ACCESSTOKEN_SECRET,
             {
-                expiresIn: "1d",
+                expiresIn: "15m",
             }
         );
+
+        const refreshToken = jwt.sign(
+            {
+                userId: user._id,
+                email: user.email,
+            },
+            process.env.REFRESHTOKEN_SECRET,
+            {
+                expiresIn: "7d",
+            }
+        );
+
+        res.cookie("refreshToken", refreshToken, {
+            httpOnly: true,
+            secure: false,
+            sameSite: "lax",
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+        });
+
 
         const createdUser = await UserModel.findById(user._id)
             .select("-password");
 
-        return res.status(201).json({
+        return res.status(200).json({
             success: true,
-            message: "User registered successfully",
-            token,
+            message: "Successfully login",
+            accessToken,
             user: createdUser,
         });
+
 
     } catch (error) {
         console.error(error);
@@ -121,18 +160,64 @@ const registerUser = async (req, res) => {
     }
 };
 
+const refreshToken = async (req, res) => {
+    try {
+
+        const refreshToken = req.cookies.refreshToken;
+
+        if (!refreshToken) {
+            return res.status(401).json({
+                success: false,
+                message: "Refresh token is required",
+            })
+        }
+
+        const decoded = jwt.verify(refreshToken, process.env.REFRESHTOKEN_SECRET);
+
+        const accessToken = jwt.sign(
+            {
+                userId: decoded.userId,
+                email: decoded.email,
+            },
+            process.env.ACCESSTOKEN_SECRET,
+            {
+                expiresIn: "15m",
+            }
+        );
+
+        return res.status(200).json({
+            success: true,
+            message: "Access Token refreshed Successfully",
+            accessToken,
+        })
+
+
+    } catch (error) {
+        console.error(error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Something went wrong while Refreshing Access Token",
+        });
+    }
+}
+
 // Function to logout a user
 const logout = async (req, res) => {
     try {
-        localStorage.removeItem("token");
-        // setToken(null);
-        window.location.href = "/login";
+
+        res.clearCookie("refreshToken", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+        });
 
         return res.status(200).json({
             success: true,
             message: "Successfully logout",
         })
     } catch (error) {
+        console.log(error);
         return res.status(500).json({
             success: false,
             message: "user could not be logged out",
@@ -141,4 +226,4 @@ const logout = async (req, res) => {
 }
 
 
-export { login, registerUser, logout }
+export { login, registerUser, logout, refreshToken }
