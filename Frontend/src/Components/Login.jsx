@@ -26,7 +26,7 @@ function Login() {
             );
 
             if (response.data.success) {
-                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("token", response.data.accessToken);
                 setToken(response.data.token);
 
                 alert("✅ " + response.data.message);

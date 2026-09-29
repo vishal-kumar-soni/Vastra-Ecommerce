@@ -21,6 +21,20 @@ const ShopContextProvider = (props) => {
     const [cartItems, setCartItems] = useState(getdefaultCart());
     const [token, setToken] = useState(null);
 
+    const getNewAccessToken = async () => {
+        const response = await axios.post(
+            `${BACKEND_URL}/api/user/refresh-token`,
+            {},
+            { withCredentials: true }
+        );
+
+        const newaccessToken = response.data.accessToken;
+
+        localStorage.setItem("token", newaccessToken);
+
+        return newaccessToken;
+    };
+
     useEffect(() => {
         const getProducts = async () => {
 
@@ -38,24 +52,30 @@ const ShopContextProvider = (props) => {
             }
 
 
-            if (savedToken) {
-                setToken(savedToken);
-
-                const cartResponse = await axios.post(
-                    `${BACKEND_URL}/api/product/getcart`,
-                    {},
-                    {
-                        headers: {
-                            Authorization: `Bearer ${savedToken}`,
-                        },
-                    }
-                );
-
-                setCartItems(cartResponse.data.cartData);
-
-            } else {
-                console.log("No token found in localStorage");
+            // If access token doesn't exist, get a new one using refresh token
+            if (!savedToken) {
+                savedToken = await getNewAccessToken();
             }
+
+            // If we still don't have a token, user is not logged in
+            if (!savedToken) {
+                console.log("No valid token found");
+                return;
+            }
+
+
+            setToken(savedToken);
+
+            const cartResponse = await axios.post(
+                `${BACKEND_URL}/api/product/getcart`,
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${savedToken}`,
+                    },
+                }
+            );
+            setCartItems(cartResponse.data.cartData);
         };
 
         getProducts();
@@ -64,6 +84,15 @@ const ShopContextProvider = (props) => {
 
     const addToCart = async (itemId) => {
         const authToken = localStorage.getItem("token");
+
+        if (!authToken) {
+            authToken = await getNewAccessToken();
+
+            if (!authToken) {
+                alert("Please login first");
+                return;
+            }
+        }
 
         try {
             const response = await axios.post(
@@ -88,6 +117,16 @@ const ShopContextProvider = (props) => {
     const removeFromCart = async (itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
         const authToken = localStorage.getItem("token");
+
+        if (!authToken) {
+            authToken = await getNewAccessToken();
+
+            if (!authToken) {
+                alert("Please login first");
+                return;
+            }
+        }
+
         try {
             const response = await axios.post(
                 `${BACKEND_URL}/api/product/removecart`,
@@ -145,6 +184,7 @@ const ShopContextProvider = (props) => {
         addToCart,
         removeFromCart,
         getTotalAmount,
+        getNewAccessToken
     };
 
     return (
