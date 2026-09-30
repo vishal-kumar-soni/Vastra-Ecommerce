@@ -22,23 +22,28 @@ const ShopContextProvider = (props) => {
     const [token, setToken] = useState(null);
 
     const getNewAccessToken = async () => {
+
         const response = await axios.post(
             `${BACKEND_URL}/api/user/refresh-token`,
             {},
             { withCredentials: true }
         );
+        if (response.data.success) {
+            const newaccessToken = response.data.accessToken;
 
-        const newaccessToken = response.data.accessToken;
+            localStorage.setItem("token", newaccessToken);
 
-        localStorage.setItem("token", newaccessToken);
-
-        return newaccessToken;
+            return newaccessToken;
+        } else {
+            console.log("refresh token not found")
+            return null;
+        }
     };
 
     useEffect(() => {
         const getProducts = async () => {
 
-            const savedToken = localStorage.getItem("token");
+            let savedToken = localStorage.getItem("token");
 
             try {
                 const response = await axios.get(
@@ -50,19 +55,6 @@ const ShopContextProvider = (props) => {
             } catch (error) {
                 console.log(error.message);
             }
-
-
-            // If access token doesn't exist, get a new one using refresh token
-            if (!savedToken) {
-                savedToken = await getNewAccessToken();
-            }
-
-            // If we still don't have a token, user is not logged in
-            if (!savedToken) {
-                console.log("No valid token found");
-                return;
-            }
-
 
             setToken(savedToken);
 
@@ -83,13 +75,13 @@ const ShopContextProvider = (props) => {
 
 
     const addToCart = async (itemId) => {
-        const authToken = localStorage.getItem("token");
+        let authToken = localStorage.getItem("token");
 
         if (!authToken) {
             authToken = await getNewAccessToken();
 
             if (!authToken) {
-                alert("Please login first");
+                alert("Login first Please");
                 return;
             }
         }
@@ -102,21 +94,55 @@ const ShopContextProvider = (props) => {
                     headers: {
                         Authorization: `Bearer ${authToken}`,
                     },
-                },
+                }
             );
 
             if (response.data.success) {
                 setCartItems(response.data.cartData);
             }
+
         } catch (error) {
-            console.error(error);
-            alert("Please login first");
+
+            if (error.response?.status === 401) {
+
+                console.log("Access token expired. Refreshing...");
+
+                const newAccessToken = await getNewAccessToken();
+
+                if (!newAccessToken) {
+                    alert("Please login first");
+                    return;
+                }
+
+                // Retry request with new token
+                try {
+                    const response = await axios.post(
+                        `${BACKEND_URL}/api/product/addcart`,
+                        { itemId },
+                        {
+                            headers: {
+                                Authorization: `Bearer ${newAccessToken}`,
+                            },
+                        }
+                    );
+
+                    if (response.data.success) {
+                        setCartItems(response.data.cartData);
+                    }
+
+                } catch (retryError) {
+                    console.error("Retry failed:", retryError);
+                    alert("Please login again");
+                }
+
+            } else {
+                console.error(error);
+            }
         }
     };
-
     const removeFromCart = async (itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-        const authToken = localStorage.getItem("token");
+        let authToken = localStorage.getItem("token");
 
         if (!authToken) {
             authToken = await getNewAccessToken();

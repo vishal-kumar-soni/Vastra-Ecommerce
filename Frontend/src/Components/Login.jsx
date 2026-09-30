@@ -23,6 +23,9 @@ function Login() {
             const response = await axios.post(
                 `${BACKEND_URL}/api/user/login`,
                 { email, password },
+                {
+                    withCredentials: true
+                }
             );
 
             if (response.data.success) {

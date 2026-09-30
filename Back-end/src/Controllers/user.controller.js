@@ -40,7 +40,7 @@ const login = async (req, res) => {
             },
             process.env.ACCESSTOKEN_SECRET,
             {
-                expiresIn: "15m",
+                expiresIn: "2m",
             }
         );
 
@@ -171,7 +171,6 @@ const refreshToken = async (req, res) => {
                 message: "Refresh token is required",
             })
         }
-
         const decoded = jwt.verify(refreshToken, process.env.REFRESHTOKEN_SECRET);
 
         const accessToken = jwt.sign(

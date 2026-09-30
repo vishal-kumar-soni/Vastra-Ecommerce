@@ -25,6 +25,9 @@ function Signup() {
             const response = await axios.post(
                 `${BACKEND_URL}/api/user/signup`,
                 { userName, email, password },
+                {
+                    withCredentials: true
+                }
             );
 
             if (response.data.success) {

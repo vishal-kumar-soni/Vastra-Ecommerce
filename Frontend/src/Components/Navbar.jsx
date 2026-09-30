@@ -154,7 +154,7 @@ function Navbar() {
                         <Link id="loginIcon" to="/login">
                             {" "}
                             <button
-                                onClick={window.scrollTo(0, 0)}
+                                onClick={() => window.scrollTo(0, 0)}
                                 className=" px-4 py-2 max-lg:py-1.5 max-lg:px-3rounded cursor-pointer  active:bg-green-700"
                             >
                                 Login
@@ -213,8 +213,8 @@ function Navbar() {
                     <ul>
                         {
                             navLinks.map((navLink, idx) => {
-                                return <>
-                                    <NavLink key={idx} to={navLink.link} className={({ isActive }) =>
+                                return <div key={idx} >
+                                    <NavLink  to={navLink.link} className={({ isActive }) =>
                                         `cursor-pointer ${isActive ? " text-red-400" : ""
                                         }`
                                     }>
@@ -224,7 +224,7 @@ function Navbar() {
                                         </li>
 
                                     </NavLink>
-                                </>
+                                </div>
                             })
                         }
 
@@ -242,14 +242,13 @@ function Navbar() {
                             <Link to="/login">
                                 {" "}
                                 <button
-                                    onClick={window.scrollTo(0, 0)}
+                                    onClick={() => window.scrollTo(0, 0)}
                                     className=" bg-linear-to-l to-green-400 via-green-500 from-green-400 text-white rounded-sm cursor-pointer py-2 shadow-xl shadow-slate-200   transition-all duration active:scale-95max-lg:py-1.5 max-lg:px- active:bg-green-700 w-[120px] px-3  max-sm:w-[100%]"
                                 >
                                     Login
                                 </button>
                             </Link>
                         )}
-
                     </ul>
                 </div>
             </div>

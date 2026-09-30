@@ -15,7 +15,7 @@ const isAuth = async (req, res, next) => {
 
     const token = authHeader.split(" ")[1];
 
-    const decodedToken = jwt.verify(token, process.env.SECRET);
+    const decodedToken = jwt.verify(token, process.env.ACCESSTOKEN_SECRET);
 
     const user = await UserModel.findById(
       decodedToken.userId

@@ -91,7 +91,7 @@ function ShopCategoryViz() {
                         return <div key={item.id} id="ShopCategoryVizItem" ref={(el) => (cardsRef.current[i] = el)}>
                             <Link to={`${item.path}`}>
                                 <div id="innerDiv" className="h-[100px]  cursor-pointer">
-                                    <div id="innerDivIcon" className="  size-18 border-2 px-[9px] py-2 border-cyan-500 rounded-full ">
+                                    <div id="innerDivIcon" className=" ml-2 md:ml-0 size-18 border-2 px-[9px] py-2 border-cyan-500 rounded-full ">
                                         <span id="icon" className="text-[48px]   h-12 w-12 text-cyan-500">{item.icon}</span>
                                     </div>
                                     <h3 id="innerBtn" className="text-center bg-gray-300 rounded-[6px] py-1.5 px-3 mt-5 font-semibold    "> {item.text} </h3>

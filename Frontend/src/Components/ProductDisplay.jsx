@@ -84,7 +84,7 @@ function productDisplay(props) {
                         </div>
                     </div>
                 </div>
-                <button onClick={() => { addToCart(product.id) }} className='py-3 px-8 w-[200px] rounded text-[1rem] font-semibold bg-[#ff4141] text-white mb-[10px] border-none outline-none cursor-pointer max-lg:py-2.5 max-lg:px-6 max-lg:mb-[6px] max-md:py-2 max-md:px-4 '>ADD TO CART</button>
+                <button onClick={() => addToCart(product.id)} className='py-3 px-8 w-[200px] rounded text-[1rem] font-semibold bg-[#ff4141] text-white mb-[10px] border-none outline-none cursor-pointer max-lg:py-2.5 max-lg:px-6 max-lg:mb-[6px] max-md:py-2 max-md:px-4 '>ADD TO CART</button>
 
                 <p className='mt-3 max-lg:mt-2.5'><span className='font-semibold'>Category: </span>{product.category}, T-shirt, Crop-Top</p>
                 <p className='mt-3 max-lg:mt-2.5'><span className='font-semibold'>Tags: </span>Modern, Latest</p>

@@ -114,8 +114,6 @@ const addCart = async (req, res) => {
         user.markModified("cartData");
         await user.save();
 
-        console.log(user.email, "addcart updated in controller")
-
         return res.status(200).json({
             success: true,
             message: "Item added to cart",
